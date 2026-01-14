@@ -30,3 +30,19 @@ jobs:
 
       - name: Build project
         run: pnpm build
+
+      - name: Create archives
+        run: |
+          cd dist
+          tar -czf ../dist.tar.gz .
+          zip -r ../dist.zip .
+          cd ..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist.tar.gz
+            dist.zip
+          generate_release_notes: true
+          fail_on_unmatched_files: true
