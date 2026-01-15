@@ -13,8 +13,6 @@ export function ProductsPage() {
 
   const { member } = useCardContext();
 
-  if (!member) return null;
-
   const currentData = mokeProducts
     .filter((product) => product.product_type_id === selectedProductType)
     .slice(8 * (page - 1), 8 * page);
@@ -44,7 +42,7 @@ export function ProductsPage() {
               <h1 class="font-semibold text-xl">
                 {member.firstName} {member.lastName}
               </h1>
-              <span>15.00€</span>
+              <span>{member.balance}€</span>
             </>
           ) : (
             <h1 class="font-semibold text-xl">Veuillez scanner votre carte</h1>
