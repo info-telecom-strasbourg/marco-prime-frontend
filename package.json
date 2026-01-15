@@ -9,7 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.27.2"
+    "@tailwindcss/vite": "^4.1.18",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-preact": "^0.562.0",
+    "preact": "^10.27.2",
+    "preact-iso": "^2.11.1",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^4.1.18",
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.2",

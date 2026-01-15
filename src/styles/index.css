@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-stone-950);
+  --color-primary: var(--color-amber-400);
+  --color-primary-foreground: var(--color-stone-950);
+  --color-secondary: var(--color-stone-300);
+  --color-secondary-foreground: var(--color-stone-950);
+  --color-accent: var(--color-stone-400);
+  --color-accent-foreground: var(--color-stone-950);
+  --color-muted: var(--color-stone-200);
+  --color-muted-foreground: var(--color-white);
+  --color-destructive: var(--color-red-500);
+  --color-destructive-foreground: var(--color-white);
+  --color-success: var(--color-green-500);
+  --color-success-foreground: var(--color-white);
+}
+
+@layer base {
+  html {
+    font-size: 19px;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
