@@ -1,6 +1,11 @@
+import { LocationProvider } from "preact-iso";
 import type { PropsWithChildren } from "preact/compat";
-import { CardProvider } from "../contexts/card_number";
+import { MemberProvider } from "../contexts/member-context";
 
 export function Providers({ children }: PropsWithChildren) {
-  return <CardProvider>{children}</CardProvider>;
+  return (
+    <LocationProvider>
+      <MemberProvider>{children}</MemberProvider>
+    </LocationProvider>
+  );
 }

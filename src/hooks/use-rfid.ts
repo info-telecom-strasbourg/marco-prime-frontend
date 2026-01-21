@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 
-export function useRfidInput() {
-  const [value, setValue] = useState("");
+export function useRfid() {
+  const [value, setValue] = useState<string | undefined>(undefined);
   const bufferRef = useRef("");
 
   useEffect(() => {
@@ -28,6 +28,6 @@ export function useRfidInput() {
 
   return {
     value,
-    clear: () => setValue(""),
+    clear: () => setValue(undefined),
   };
 }

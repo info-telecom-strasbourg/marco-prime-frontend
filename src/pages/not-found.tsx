@@ -1,10 +1,11 @@
-export function NotFound() {
+import { HOME_ROUTE_URL } from "./home";
+
+export function NotFoundPage() {
   return (
-    <a href="/">
-      <div class="w-screen h-screen overflow-hidden gap-2 flex items-center justify-center flex-col">
-        <h1 class="text-4xl font-bold">404 - Cette page n'existe pas</h1>
-        <p class="text-lg">Appuyer pour revenir sur la page d'accueil</p>
-      </div>
-    </a>
+    <div class="grid grid-rows-[auto_1fr] flex-1 gap-1">
+      <a href={HOME_ROUTE_URL} class="flex flex-1 justify-center items-center">
+        Not Found Page
+      </a>
+    </div>
   );
 }

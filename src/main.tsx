@@ -1,5 +1,11 @@
 import { render } from "preact";
-import { App } from "./app.tsx";
+import { Providers } from "./components/providers.tsx";
+import { Router } from "./router.tsx";
 import "./styles/index.css";
 
-render(<App />, document.getElementById("app")!);
+render(
+  <Providers>
+    <Router />
+  </Providers>,
+  document.getElementById("app")!,
+);
