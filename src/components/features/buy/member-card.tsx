@@ -1,10 +1,11 @@
 import type z from "zod";
-import { useMember } from "../../contexts/member-context";
-import { useShopping } from "../../contexts/shopping-context";
-import { cn } from "../../helpers/cn";
-import type { memberSchema } from "../../validators/purchase.validator";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { Skeleton } from "../ui/skeleton";
+import { useMember } from "../../../contexts/member-context";
+import { shopping } from "../../../contexts/shopping-context";
+import { cn } from "../../../utils/cn";
+import { hasInsufficientBalance } from "../../../utils/validation";
+import type { memberSchema } from "../../../schemas/member.schema";
+import { Alert, AlertDescription, AlertTitle } from "../../ui/alert";
+import { Skeleton } from "../../ui/skeleton";
 
 export function MemberCard() {
   const { data, loading } = useMember();
@@ -28,8 +29,10 @@ function MemberCardLoaded({
 }: {
   member: z.infer<typeof memberSchema>;
 }) {
-  const { total } = useShopping();
-  const notEnoughMoney = total > Number(member.balance);
+  const notEnoughMoney = hasInsufficientBalance(
+    shopping.total.value,
+    member.balance,
+  );
   return (
     <>
       <Alert>

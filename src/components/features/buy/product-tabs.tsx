@@ -1,37 +1,36 @@
 import z from "zod";
-import { PRODUCT_PAGE_SIZE, PRODUCT_TYPE_COUNT } from "../../constants";
-import { cn } from "../../helpers/cn";
-import { capitalize } from "../../helpers/string";
-import { useFetch } from "../../hooks/use-fetch";
-import { useSafeLocation } from "../../hooks/use-search-params";
-import { PURCHASE_ROUTE_URL } from "../../pages/purchase";
-import {
-  productTypeSchema,
-  purchaseSearchParams,
-} from "../../validators/purchase.validator";
-import { NextPageButton, PrevPageButton } from "../layout/page-buttons";
-import { Button } from "../ui/button";
-import { Skeleton } from "../ui/skeleton";
+import { PRODUCT_PAGE_SIZE, PRODUCT_TYPE_COUNT } from "../../../constants";
+import { cn } from "../../../utils/cn";
+import { capitalize } from "../../../utils/string";
+import { useApi } from "../../../hooks/use-api";
+import { useSafeSearchParams } from "../../../hooks/use-safe-search-params";
+import { BUY_ROUTE_URL } from "../../../pages/buy";
+import { buySearchParamsSchema } from "../../../schemas/pagination.schema";
+import { productTypeSchema } from "../../../schemas/product.schema";
+import { NextPageButton, PrevPageButton } from "../../layout/page-buttons";
+import { Button } from "../../ui/button";
+import { TabSkeleton } from "../../shared/loading/tab-skeleton";
 
-export function ProductHeader() {
-  const { data } = useFetch(
+export function ProductTabs() {
+  const { data, loading } = useApi(
     z.array(productTypeSchema),
     "http://localhost:3000/api/v1/product-types",
   );
-  const { searchParams } = useSafeLocation(purchaseSearchParams);
+  const { searchParams } = useSafeSearchParams(buySearchParamsSchema);
 
-  if (!data)
+  if (loading || !data) {
     return (
       <header class="flex">
         <div class="flex-1 flex gap-2">
           {new Array(PRODUCT_TYPE_COUNT).fill(null).map((_, id) => (
-            <LoadingTab key={id} />
+            <TabSkeleton key={id} />
           ))}
         </div>
         <PrevPageButton disabled />
         <NextPageButton disabled />
       </header>
     );
+  }
 
   const [currentTab] = data?.filter(
     (tab) => tab.id === searchParams.categoryId,
@@ -59,25 +58,17 @@ export function ProductHeader() {
 }
 
 function Tab({ label, category }: { label: string; category: number }) {
-  const { searchParams, route } = useSafeLocation(purchaseSearchParams);
+  const { searchParams, route } = useSafeSearchParams(buySearchParamsSchema);
   const isActive = category === searchParams.categoryId;
 
   return (
     <Button
       class={cn(isActive && "text-primary hover:text-primary")}
       variant="ghost"
-      onClick={() => route(`${PURCHASE_ROUTE_URL}?categoryId=${category}`)}
+      onClick={() => route(`${BUY_ROUTE_URL}?categoryId=${category}`)}
       size="sm"
     >
       {capitalize(label)}
     </Button>
-  );
-}
-
-function LoadingTab() {
-  return (
-    <div class="py-3">
-      <Skeleton class="h-7 w-20" />
-    </div>
   );
 }

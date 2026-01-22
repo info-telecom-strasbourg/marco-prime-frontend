@@ -2,9 +2,9 @@ import { createContext } from "preact";
 import type { PropsWithChildren } from "preact/compat";
 import { useContext, useEffect } from "preact/hooks";
 import type z from "zod";
-import { useFetch } from "../hooks/use-fetch";
+import { useApi } from "../hooks/use-api";
 import { useRfid } from "../hooks/use-rfid";
-import { memberSchema } from "../validators/purchase.validator";
+import { memberSchema } from "../schemas/member.schema";
 
 const MemberContext = createContext<{
   data: z.infer<typeof memberSchema> | null;
@@ -21,11 +21,10 @@ export function useMember() {
 
 export function MemberProvider({ children }: PropsWithChildren) {
   const { value: memberCardId, clear } = useRfid();
-  const { data, loading, refetch } = useFetch(
+  const { data, loading, refetch } = useApi(
     memberSchema,
     `http://localhost:3000/api/v1/member/${memberCardId}`,
-    {},
-    false,
+    { immediate: false },
   );
 
   useEffect(() => {

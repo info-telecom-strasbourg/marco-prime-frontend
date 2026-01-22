@@ -6,7 +6,7 @@ import { CREDITS_ROUTE_URL, CreditsPage } from "./pages/credits";
 import { HOME_ROUTE_URL, HomePage } from "./pages/home";
 import { NotFoundPage } from "./pages/not-found";
 import { ORDERS_ROUTE_URL, OrdersPage } from "./pages/orders";
-import { PURCHASE_ROUTE_URL, PurchasePage } from "./pages/purchase";
+import { BUY_ROUTE_URL, BuyPage } from "./pages/buy";
 import { RECHARGE_ROUTE_URL, RechargePage } from "./pages/recharge";
 import { WIFI_ROUTE_URL, WifiPage } from "./pages/wifi";
 
@@ -15,7 +15,7 @@ export function Router() {
     <Layout>
       <ErrorBoundary onError={(e) => console.error(e)}>
         <NativeRouter>
-          <Route path={PURCHASE_ROUTE_URL} component={PurchasePage} />
+          <Route path={BUY_ROUTE_URL} component={BuyPage} />
           <Route path={RECHARGE_ROUTE_URL} component={RechargePage} />
           <Route path={HOME_ROUTE_URL} component={HomePage} />
           <Route path={WIFI_ROUTE_URL} component={WifiPage} />
