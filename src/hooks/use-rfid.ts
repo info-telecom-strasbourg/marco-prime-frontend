@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 
-export function useRfid() {
+interface UseRfidOptions {
+  disabled?: boolean;
+}
+
+export function useRfid(options: UseRfidOptions = {}) {
+  const { disabled = false } = options;
   const [value, setValue] = useState<string | undefined>(undefined);
   const bufferRef = useRef("");
 
   useEffect(() => {
+    if (disabled) {
+      bufferRef.current = "";
+      return;
+    }
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Enter") {
         if (bufferRef.current.length > 0) {
@@ -24,7 +34,7 @@ export function useRfid() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [disabled]);
 
   return {
     value,

@@ -40,7 +40,9 @@ export function TicketPage() {
       <Card class="w-full max-w-md gap-4 py-4">
         <div class="flex items-center justify-center gap-2 text-green-600">
           <Check class="size-8" />
-          <h1 class="text-2xl font-bold">Paiement validé</h1>
+          <h1 class="text-2xl font-bold">
+            {ticket.type === "purchase" ? "Paiement validé" : "Rechargement validé"}
+          </h1>
         </div>
 
         <div class="px-6 text-center">
@@ -48,33 +50,78 @@ export function TicketPage() {
           <p class="text-sm text-muted-foreground">{formattedDate}</p>
         </div>
 
-        <div class="px-6 border-t border-b py-3">
-          {ticket.products.map((product) => (
-            <div key={product.id} class="flex justify-between py-1 text-sm">
-              <span>
-                {product.amount}x {product.name}
-              </span>
-              <span>{(Number(product.price) * product.amount).toFixed(2)} EUR</span>
-            </div>
-          ))}
-        </div>
-
-        <div class="px-6 flex justify-between font-bold text-lg">
-          <span>Total</span>
-          <span>{ticket.totalPrice.toFixed(2)} EUR</span>
-        </div>
-
-        <div class="px-6 pt-2 border-t">
-          <div class="flex justify-between text-sm">
-            <span class="text-muted-foreground">Nouveau solde</span>
-            <span class="font-semibold text-green-600">{ticket.newBalance} EUR</span>
-          </div>
-        </div>
+        {ticket.type === "purchase" ? (
+          <PurchaseTicketContent ticket={ticket} />
+        ) : (
+          <RechargeTicketContent ticket={ticket} />
+        )}
 
         <p class="text-center text-sm text-muted-foreground pt-2">
           Touchez l'écran pour continuer
         </p>
       </Card>
     </div>
+  );
+}
+
+function PurchaseTicketContent({ ticket }: { ticket: Extract<typeof ticketSignal.value, { type: "purchase" }> }) {
+  if (!ticket) return null;
+
+  return (
+    <>
+      <div class="px-6 border-t border-b py-3">
+        {ticket.products.map((product) => (
+          <div key={product.id} class="flex justify-between py-1 text-sm">
+            <span>
+              {product.amount}x {product.name}
+            </span>
+            <span>{(Number(product.price) * product.amount).toFixed(2)} EUR</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="px-6 flex justify-between font-bold text-lg">
+        <span>Total</span>
+        <span>-{ticket.totalPrice.toFixed(2)} EUR</span>
+      </div>
+
+      <div class="px-6 pt-2 border-t">
+        <div class="flex justify-between text-sm">
+          <span class="text-muted-foreground">Nouveau solde</span>
+          <span class="font-semibold text-green-600">{ticket.newBalance} EUR</span>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function RechargeTicketContent({ ticket }: { ticket: Extract<typeof ticketSignal.value, { type: "recharge" }> }) {
+  if (!ticket) return null;
+
+  return (
+    <>
+      <div class="px-6 border-t border-b py-3 space-y-2">
+        <div class="flex justify-between text-sm">
+          <span class="text-muted-foreground">Ancien solde</span>
+          <span>{ticket.previousBalance} EUR</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-muted-foreground">Rechargement</span>
+          <span class="text-green-600">+{ticket.amount} EUR</span>
+        </div>
+      </div>
+
+      <div class="px-6 flex justify-between font-bold text-lg">
+        <span>Nouveau solde</span>
+        <span class="text-green-600">{ticket.newBalance} EUR</span>
+      </div>
+
+      <div class="px-6 pt-2 border-t">
+        <div class="flex justify-between text-sm">
+          <span class="text-muted-foreground">Validé par</span>
+          <span class="font-medium">{ticket.processedBy}</span>
+        </div>
+      </div>
+    </>
   );
 }

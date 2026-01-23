@@ -73,6 +73,7 @@ export function SubmitButton() {
       const lastTransaction = transactions[transactions.length - 1];
 
       setTicket({
+        type: "purchase",
         transactions,
         products,
         totalPrice,
