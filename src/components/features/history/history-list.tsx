@@ -2,9 +2,9 @@ import { ORDER_PAGE_SIZE } from "../../../constants";
 import type { OrderSchema } from "../../../schemas/order.schema";
 import { Card } from "../../ui/card";
 import { Skeleton } from "../../ui/skeleton";
-import { OrderItem } from "./order-item";
+import { HistoryItem } from "./history-item";
 
-function OrderListSkeleton() {
+function HistoryListSkeleton() {
   return (
     <Card class="min-h-0 gap-0 py-0 overflow-auto">
       {new Array(ORDER_PAGE_SIZE).fill(null).map((_, index) => (
@@ -22,20 +22,20 @@ function OrderListSkeleton() {
   );
 }
 
-interface OrderListProps {
+interface HistoryListProps {
   orders: OrderSchema[] | null;
   loading: boolean;
 }
 
-export function OrderList({ orders, loading }: OrderListProps) {
+export function HistoryList({ orders, loading }: HistoryListProps) {
   if (loading || !orders) {
-    return <OrderListSkeleton />;
+    return <HistoryListSkeleton />;
   }
 
   return (
     <Card class="min-h-0 gap-0 py-0 overflow-auto">
       {orders.map((order) => (
-        <OrderItem key={order.id} order={order} />
+        <HistoryItem key={order.id} order={order} />
       ))}
     </Card>
   );

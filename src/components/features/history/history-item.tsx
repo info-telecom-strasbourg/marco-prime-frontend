@@ -1,10 +1,10 @@
 import type { OrderSchema } from "../../../schemas/order.schema";
 
-interface OrderItemProps {
+interface HistoryItemProps {
   order: OrderSchema;
 }
 
-export function OrderItem({ order }: OrderItemProps) {
+export function HistoryItem({ order }: HistoryItemProps) {
   const formattedDate = new Date(order.date).toLocaleString("fr-FR", {
     day: "2-digit",
     month: "2-digit",

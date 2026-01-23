@@ -4,12 +4,12 @@ import type { PaginationSchema } from "../../../schemas/product.schema";
 import { NextPageButton, PrevPageButton } from "../../layout/page-buttons";
 import { Skeleton } from "../../ui/skeleton";
 
-interface OrderNavigationProps {
+interface HistoryNavigationProps {
   pagination: PaginationSchema | null;
   loading: boolean;
 }
 
-export function OrderNavigation({ pagination, loading }: OrderNavigationProps) {
+export function HistoryNavigation({ pagination, loading }: HistoryNavigationProps) {
   const { searchParams } = useSafeSearchParams(pageSearchParamsSchema);
 
   if (loading || !pagination) {

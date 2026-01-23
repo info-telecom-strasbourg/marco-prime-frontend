@@ -8,7 +8,7 @@ import {
 import { BUY_ROUTE_URL } from "../../pages/buy";
 import { CONFIG_ROUTE_URL } from "../../pages/config";
 import { HOME_ROUTE_URL } from "../../pages/home";
-import { ORDERS_ROUTE_URL } from "../../pages/orders";
+import { HISTORY_ROUTE_URL } from "../../pages/history";
 import { RECHARGE_ROUTE_URL } from "../../pages/recharge";
 import { NavButton } from "../shared/navigation/nav-button";
 
@@ -23,7 +23,7 @@ export function NavBar() {
         icon={ArrowLeftRight}
       />
       <NavButton href={CONFIG_ROUTE_URL} label="Config" icon={Wrench} />
-      <NavButton href={ORDERS_ROUTE_URL} icon={ClockFading} />
+      <NavButton href={HISTORY_ROUTE_URL} icon={ClockFading} />
     </nav>
   );
 }
