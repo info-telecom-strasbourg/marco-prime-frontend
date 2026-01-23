@@ -5,8 +5,8 @@ type LayoutProps = PropsWithChildren;
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div class="w-screen h-screen grid grid-rows-[1fr_auto]">
-      <>{children}</>
+    <div class="w-screen h-screen flex flex-col overflow-hidden">
+      <main class="flex-1 flex overflow-auto">{children}</main>
       <NavBar />
     </div>
   );

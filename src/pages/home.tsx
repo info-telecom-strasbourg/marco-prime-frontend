@@ -7,10 +7,14 @@ export function HomePage() {
   const { route } = useLocation();
   return (
     <div
-      class="flex-1 flex justify-center items-center cursor-pointer"
+      class="flex-1 flex flex-col justify-center items-center cursor-pointer gap-5"
       onClick={() => route(BUY_ROUTE_URL)}
     >
-      <h1 class="text-5xl font-semibold">Marco Prime</h1>
+      <img src="/marco.svg" alt="Marco Logo" class="h-40" />
+      <div class="flex items-end gap-2">
+        <h1 class="text-2xl h-12">Powered by</h1>
+        <img src="/asse.png" alt="ASSE" class="h-20" />
+      </div>
     </div>
   );
 }

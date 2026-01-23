@@ -16,7 +16,7 @@ export function PrevPageButton(props: ComponentProps<typeof Button>) {
     <Button
       size="sm"
       variant="ghost"
-      onClick={() => route(prevPage.toString())}
+      onClick={() => route(prevPage.pathname + prevPage.search)}
       {...props}
     >
       <ArrowLeft />
@@ -36,7 +36,7 @@ export function NextPageButton(props: ComponentProps<typeof Button>) {
     <Button
       size="sm"
       variant="ghost"
-      onClick={() => route(nextPage.toString())}
+      onClick={() => route(nextPage.pathname + nextPage.search)}
       {...props}
     >
       <ArrowRight />
