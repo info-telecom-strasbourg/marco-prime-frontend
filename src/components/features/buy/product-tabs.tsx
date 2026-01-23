@@ -20,8 +20,8 @@ export function ProductTabs() {
 
   if (loading || !data) {
     return (
-      <header class="flex">
-        <div class="flex-1 flex gap-2">
+      <header class="flex items-center gap-2">
+        <div class="flex-1 min-w-0 flex gap-2 overflow-x-auto">
           {new Array(PRODUCT_TYPE_COUNT).fill(null).map((_, id) => (
             <TabSkeleton key={id} />
           ))}
@@ -37,8 +37,8 @@ export function ProductTabs() {
   );
 
   return (
-    <header class="flex">
-      <div class="flex-1">
+    <header class="flex items-center gap-2">
+      <div class="flex-1 min-w-0 flex overflow-x-auto">
         {data.map((productType) => (
           <Tab
             key={productType.id}

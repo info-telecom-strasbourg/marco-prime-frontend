@@ -8,6 +8,7 @@ import { NotFoundPage } from "./pages/not-found";
 import { HISTORY_ROUTE_URL, HistoryPage } from "./pages/history";
 import { BUY_ROUTE_URL, BuyPage } from "./pages/buy";
 import { RECHARGE_ROUTE_URL, RechargePage } from "./pages/recharge";
+import { TICKET_ROUTE_URL, TicketPage } from "./pages/ticket";
 import { WIFI_ROUTE_URL, WifiPage } from "./pages/wifi";
 
 export function Router() {
@@ -23,6 +24,7 @@ export function Router() {
           <Route path={CREDITS_ROUTE_URL} component={CreditsPage} />
           <Route path={CONFIG_ROUTE_URL} component={ConfigPage} />
           <Route path={BILL_ROUTE_URL} component={BillPage} />
+          <Route path={TICKET_ROUTE_URL} component={TicketPage} />
           <Route default component={NotFoundPage} />
         </NativeRouter>
       </ErrorBoundary>
